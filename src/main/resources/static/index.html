@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora Fiap & Cia</title>
+</head>
+<body>
+  <h1> Calculadora</h1>
+  <label> Número 1: <input type="number" id="numero1"> </label>
+  <label> Número 2: <input type="number" id="numero2"> </label>
+  <select id="operacao">
+    <option value="+">somar</option>
+    <option value="-">subtrair</option>
+    <option value="*">Multiplicar</option>
+    <option value="/">dividir</option>
+
+  </select>
+  <button onclick="calcular()">Calcular</button>
+  <label> Resultado: <input id="resultado" readonly></label>
+
+  <script>
+    function calcular() {
+      const a = document.getElementById("numero1").value
+      const b = document.getElementById("numero2").value
+      const op = document.getElementById("operacao").value
+      const campo = document.getElementById("resultado")
+      const url = `/calculadora/${op}?a=${a}&b=${b}`
+      const resultado = fetch(url)
+      if (resultado.ok) {
+        campo.value = resultado.text()
+
+      }
+      else{
+        campo.value = "Erro, tente novamente"
+      }
+    }
+  </script>
+
+</body>
+</html>
